@@ -1,27 +1,42 @@
+#!/usr/bin/python3
 import json
+from os import path
+
 
 class FileStorage:
+    """ file storage class"""
+
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """Return the dictionary __objects"""
-        return FileStorage.__objects
+        """ returns : dictionary """
+        return self.__objects
 
     def new(self, obj):
-        """Set in __objects the obj with key <obj class name>.id"""
-        key = obj.__class__.__name__ + "." + obj.id
-        FileStorage.__objects[key] = obj
+        """ set object with key """
+        self.__objects[obj.__class__.__name__ + '.' + obj.id] = obj
 
     def save(self):
-        """Serialize __objects to the JSON file (path: __file_path)"""
-        with open(FileStorage.__file_path, 'w', encoding='utf-8') as file:
-            json.dump(FileStorage.__objects, file)
+        """ serializes to json file """
+        temp = {}
+        for key in self.__objects:
+            temp[key] = self.__objects[key].to_dict()
+        with open(self.__file_path, "w+", encoding='utf-8') as out_file:
+            json.dump(temp, out_file)
 
     def reload(self):
-        """Deserialize the JSON file to __objects (only if the JSON file (__file_path) exists; otherwise, do nothing)"""
-        try:
-            with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
-                FileStorage.__objects = json.load(file)
-        except FileNotFoundError:
-            pass
+        """ deserializes json to file """
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.city import City
+        from models.state import State
+        from models.place import Place
+        from models.review import Review
+        from models.amenity import Amenity
+        if path.exists(self.__file_path):
+            with open(self.__file_path, "r", encoding='utf-8') as in_file:
+                dataset = json.load(in_file)
+                for data in dataset.values():
+                    name_of_class = data['__class__']
+                    self.new(eval(name_of_class + "(**" + str(data) + ")"))
