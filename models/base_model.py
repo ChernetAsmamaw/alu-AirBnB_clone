@@ -1,35 +1,52 @@
-import uuid
-import models.engine.file_storage
+#!/usr/bin/python3
+"""This file contains the BaseModel class"""
+
 from datetime import datetime
+import models
+import uuid
+
 
 class BaseModel:
-    storage = models.engine.file_storage.FileStorage()
+    """BaseModel class that defines all common attributes/methods"""
 
     def __init__(self, *args, **kwargs):
-        if kwargs:
-            for key, value in kwargs.items():
-                if key != "__class__":
-                    setattr(self, key, value)
-            if "created_at" in kwargs:
-                self.created_at = datetime.datetime.strptime(kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
-            if "updated_at" in kwargs:
-                self.updated_at = datetime.datetime.strptime(kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
+        """Initializing the BaseModel class"""
+
+        # if keyword argument is provided initialize class with the specified
+        # values
+        if kwargs != {}:
+            for key, val in kwargs.items():
+                if key == '__class__':
+                    continue
+                if key == 'created_at':
+                    val = datetime.fromisoformat(val)
+                elif key == 'updated_at':
+                    val = datetime.fromisoformat(val)
+                self.__setattr__(key, val)
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.datetime.now()
-            self.updated_at = datetime.datetime.now()
-            storage.new(self)
-    
+            self.created_at = datetime.utcnow()
+            self.updated_at = self.created_at
+
+            #
+            models.storage.new(self)
+
     def __str__(self):
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        """String representation of BaseModel"""
+
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        self.updated_at = datetime.now()
-        storage.save()
+        """Updating the updated_at attribute with the current datetime"""
+        self.updated_at = datetime.utcnow()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
-        my_dict = self.__dict__.copy()
-        my_dict["__class__"] = self.__class__.__name__
-        my_dict["created_at"] = self.created_at.isoformat()
-        my_dict["updated_at"] = self.updated_at.isoformat()
-        return my_dict
+        """Returning a dictionary containing all keys/values of __dict__"""
+
+        formated_dict = self.__dict__.copy()
+        formated_dict['created_at'] = formated_dict['created_at'].isoformat()
+        formated_dict['updated_at'] = formated_dict['updated_at'].isoformat()
+        formated_dict['__class__'] = self.__class__.__name__
+        return formated_dict
