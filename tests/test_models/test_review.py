@@ -16,3 +16,5 @@ class TestReview(unittest.TestCase):
             "user_id",
             "text"
         ]
+    def test_review_is_a_subclass_of_basemodel(self):
+        self.assertTrue(issubclass(type(self.review), BaseModel))
