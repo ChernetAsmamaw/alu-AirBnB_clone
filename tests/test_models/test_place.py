@@ -2,9 +2,11 @@
 """Test suite for the Place class of models.place"""
 import unittest
 
-from alu-AirBnB_clone.models.base_model import BaseModel
-from alu-AirBnB_clone.models.base_model import Place
+import importlib.import_module
 
+models = importlib.import_module('alu-AirBnB_clone.models')  
+from models.base_model import BaseModel
+from models.base_model import Place
 
 class TestPlace(unittest.TestCase):
     """Test cases against the Place class"""
