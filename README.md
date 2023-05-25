@@ -5,7 +5,7 @@ The goal of this project is deploy on server a simple copy of the AirBnB website
 <div align=center>  
     <img  
     style="text-align:center"  
-    src="https://github.com/ChernetAsmamaw/alu-airbnb_clone/blob/main/assets/airbnb_clone.png"
+    src="https://github.com/ChernetAsmamaw/alu-AirBnB_clone/blob/main/assets/airbnb_clone.png"
     alt="ALU BSE"/>  
 </div>
 
