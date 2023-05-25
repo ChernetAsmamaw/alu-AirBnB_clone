@@ -235,8 +235,8 @@ class HBNBCommand(cmd.Cmd):
         return cmd.Cmd.precmd(self, line)
 
 
-    # This makes the codes in this file to not execute when imported
-    # only excute when run as a separate file
-    # The cmdloop() method is used to start the interpreter loop
+# This makes the codes in this file to not execute when imported
+# only excute when run as a separate file
+# The cmdloop() method is used to start the interpreter loop
 if __name__ == '__main__':
     HBNBCommand().cmdloop("\n Hello! Welcome to the Matrix.\n")

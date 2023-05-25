@@ -17,9 +17,9 @@ class BaseModel:
             for key, value in kwargs.items():
                 # Here we are checking if the key is equal to the class name,
                 #   if it is we are going to skip it.
-                # This is cuz we don't want to set the class name as an attribute.
+                # This's cuz we don't want to set the class name as an attribute
                 # Each key of the dictionary is an attribute name and each value
-                #  of the dictionary is the value of the attribute name.
+                # of the dictionary is the value of the attribute name.
                 if key == '__class__':
                     continue
                 # Here we checke if the key is equal to created_at or updated_at,
@@ -55,12 +55,12 @@ class BaseModel:
     def to_dict(self):
         # This is a copy of the __dict__ attribute of the instance
         # So that we don't modify the original dictionary
-        # The data is also different as it's converted to string & in ISO format
+        # The data is also different as it's converted to string & ISO format
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
         # created_at & updated_at: change from datetime object to string
         # Here instead of creating new variables we can also use:
-        #       old_created = self.created_at and old_updated = self.updated_at
+        # old_created = self.created_at and old_updated = self.updated_at
 
         old_created = new_dict["created_at"]
         old_updated = new_dict["updated_at"]
