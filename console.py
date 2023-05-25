@@ -3,7 +3,15 @@
 import cmd
 from models import storage
 
-list_of_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+list_of_classes = [
+    "BaseModel",
+    "User",
+    "State",
+    "City",
+    "Amenity",
+    "Place",
+    "Review"
+]
 
 
 class HBNBCommand(cmd.Cmd):
@@ -13,8 +21,8 @@ class HBNBCommand(cmd.Cmd):
         """Exits the program"""
         print("\nGoodbye!")
         return True
-
     # EOF(End Of File) is CTRl + D
+
     def do_EOF(self, args):
         """Exits the program  using CTRL + D"""
         # so that it doesn't continue on the same line
@@ -30,12 +38,12 @@ class HBNBCommand(cmd.Cmd):
         saves it (to the JSON file) and prints the id.
         Usage: create <class name>
         Example: create BaseModel"""
-        # If nothing is entered
+       # If nothing is entered
         if len(args) == 0:
-            print("** class name missing **")
+            print('** class name missing **')
         # If the argument being passed is not BaseModel
         elif args not in list_of_classes:
-            print("** class doesn't exist **'")
+            print("** class doesn\'t exist **'")
         # If the arg is class name then we create an instance of that class & save it
         else:
             from models.base_model import BaseModel
@@ -56,7 +64,7 @@ class HBNBCommand(cmd.Cmd):
         """Prints the string representation of an instance based on the
         class name and id respectively.
         Usage: show <class name> <id>
-        Example: show BaseModel 1234-1234-1234"""
+        Example: show BaseModel 1234-1234-1234 """
 
         # The argument is passed as a string, we split it into a list for easy access
         arg_list = args.split()
@@ -64,27 +72,27 @@ class HBNBCommand(cmd.Cmd):
 
         # If nothing is entered
         if len(arg_list) == 0:
-            print("** class name missing **")
+            print('** class name missing **')
         # If the argument being passed is not BaseModel
         elif arg_list[0] not in list_of_classes:
-            print("** class doesn't exist **'")
+            print("** class doesn\'t exist **'")
         # If the id is not passed
         elif len(arg_list) < 2:
-            print("** instance id missing **")
+            print('** instance id missing **')
         # We can write the code below in much shoter way: -
         # Sice the basic consept is that storage.all()[key] returns the
         # information of an object key being <class name>.<id>
         # elif "{}.{}".format(arg_list[0], arg_list[1]) not in storage.all():
-        # print("** no instance found **")
+            # print("** no instance found **")
         # else:
-        # print(storage.all()["{}.{}".format(arg_list[0], arg_list[1])])
+            # print(storage.all()["{}.{}".format(arg_list[0], arg_list[1])])
         # we have used this below in the destroy method
         else:
             # Here we check if the id entered exists in the JSON file
             obj_list = storage.all()
             id_list = []
             for key in obj_list.keys():
-                id = key.split(".")[1]
+                id = key.split('.')[1]
                 id_list.append(id)
             if arg_list[1] not in id_list:
                 print("** no instance found **")
@@ -98,7 +106,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id respectively
         then save the change into the JSON file.
-        Usage: destroy BaseModel 1234-1234-1234"""
+        Usage: destroy BaseModel 1234-1234-1234 """
 
         # The argument is passed as a string, we split it into a list for easy access
         arg_list = args.split()
@@ -106,13 +114,13 @@ class HBNBCommand(cmd.Cmd):
 
         # If nothing is entered
         if len(arg_list) == 0:
-            print("** class name missing **")
+            print('** class name missing **')
         # If the argument being passed is not BaseModel
         elif arg_list[0] not in list_of_classes:
-            print("** class doesn't exist **'")
+            print("** class doesn\'t exist **'")
         # If the id is not passed
         elif len(arg_list) < 2:
-            print("** instance id missing **")
+            print('** instance id missing **')
         elif "{}.{}".format(arg_list[0], arg_list[1]) not in storage.all():
             print("** no instance found **")
         else:
@@ -137,12 +145,12 @@ class HBNBCommand(cmd.Cmd):
         # After that it does the same thing as above(prints all the objects)
         else:
             if args not in list_of_classes:
-                print("** class doesn't exist **'")
+                print("** class doesn\'t exist **'")
                 return
             for key, value in storage.all().items():
                 # The purpose of spliting the key is to get the class name and
                 #  compare it with the argument passed
-                class_name = key.split(".")[0]
+                class_name = key.split('.')[0]
                 if class_name == args:
                     obj_list.append(str(value))
         print(obj_list)
@@ -151,21 +159,21 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id respectively
         by adding or updating attribute then save the change into the JSON file.
         Usage:  update <class name> <id> <attribute name> "<attribute value>
-                Example: - update BaseModel 1234-1234-1234 email "aibnb@mail.com\" """
+                Example: - update BaseModel 1234-1234-1234 email "aibnb@mail.com\""""
 
         arg_list = args.split()
         if len(arg_list) == 0:
-            print("** class name missing **")
+            print('** class name missing **')
         elif arg_list[0] not in list_of_classes:
-            print("** class doesn't exist **'")
+            print("** class doesn\'t exist **'")
         elif len(arg_list) < 2:
-            print("** instance id missing **")
+            print('** instance id missing **')
         elif "{}.{}".format(arg_list[0], arg_list[1]) not in storage.all():
             print("** no instance found **")
         elif len(arg_list) < 3:
-            print("** attribute name missing **")
+            print('** attribute name missing **')
         elif len(arg_list) < 4:
-            print("** value missing **")
+            print('** value missing **')
         else:
             class_name = arg_list[0]
             id = arg_list[1]
@@ -183,7 +191,7 @@ class HBNBCommand(cmd.Cmd):
 
         count = 0
         for key in storage.all().keys():
-            class_name = key.split(".")[0]
+            class_name = key.split('.')[0]
             if class_name == args:
                 count += 1
         print(count)
@@ -202,27 +210,22 @@ class HBNBCommand(cmd.Cmd):
                 line = line.split(" ")
                 line = str(line[1]) + " " + str(line[0])
             elif "(" in line and ")" in line:
-                line = line.replace(".", " ").replace("(", " ").replace(")", "")
+                line = line.replace(".", " ").replace(
+                    "(", " ").replace(")", "")
                 # Here we created a tuple of the command that we want to execute
                 line = line.split(" ")
                 if len(line) == 3:
                     # This removes the double quotes from the string
-                    line[2] = line[2].replace('"', "")
-                    line = str(line[1]) + " " + str(line[0]) + " " + str(line[2])
+                    line[2] = line[2].replace('"', '')
+                    line = str(line[1]) + " " + \
+                        str(line[0]) + " " + str(line[2])
                 elif len(line) == 4:
-                    line[2] = line[2].replace('"', "")
+                    line[2] = line[2].replace('"', '')
                     print(line)
-                    line[3] = line[3].replace('"', "")
+                    line[3] = line[3].replace('"', '')
                     print(line)
-                    line = (
-                        str(line[1])
-                        + " "
-                        + str(line[0])
-                        + " "
-                        + str(line[2])
-                        + " "
-                        + str(line[3])
-                    )
+                    line = str(line[1]) + " " + str(line[0]) + \
+                        " " + str(line[2]) + " " + str(line[3])
                     print(line)
 
             else:
@@ -230,10 +233,9 @@ class HBNBCommand(cmd.Cmd):
 
         return cmd.Cmd.precmd(self, line)
 
+
     # This makes the codes in this file to not execute when imported
     # only excute when run as a separate file
     # The cmdloop() method is used to start the interpreter loop
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     HBNBCommand().cmdloop("\n Hello! Welcome to the Matrix.\n")
