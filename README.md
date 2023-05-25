@@ -22,7 +22,7 @@ The complete web application will be composed by:
 
 | Stage         | Repo                                                              |
 | ------------- | ----------------------------------------------------------------- |
-| The console   | [AirBnB_clone_v1](https://github.com/ChernetAsmamaw/AirBnB_clone) |
+| The console   | [AirBnB_clone_Part-1](https://github.com/ChernetAsmamaw/AirBnB_clone) |
 | Web static    | :soon:                                                            |
 | MySQL storage | :soon:                                                            |
 | Web framework | :soon:                                                            |
