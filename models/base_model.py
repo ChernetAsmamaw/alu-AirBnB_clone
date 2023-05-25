@@ -17,17 +17,17 @@ class BaseModel:
             for key, value in kwargs.items():
                 # Here we are checking if the key is equal to the class name,
                 #   if it is we are going to skip it.
-                # This is because we don't want to set the class name as an attribute.
-                # Each key of the dictionary is an attribute name and each value of the
-                #    dictionary is the value of the attribute name.
+                # This is cuz we don't want to set the class name as an attribute.
+                # Each key of the dictionary is an attribute name and each value
+                #  of the dictionary is the value of the attribute name.
                 if key == '__class__':
                     continue
-                # Here we are checking if the key is equal to the created_at or updated_at,
-                #    if it is we are going to convert the string to a datetime object.
+                # Here we checke if the key is equal to created_at or updated_at,
+                # If it's we are going to convert the string to a datetime object
                 elif key == 'created_at' or key == 'updated_at':
                     self.__dict__[key] = datetime.strptime(
                         value, "%Y-%m-%dT%H:%M:%S.%f")
-                # If all the above conditions are not met, we are going to set the key
+                # If all above conditions are false we are going to set the key
                 #   and value as an attribute.
                 else:
                     self.__dict__[key] = value
@@ -51,15 +51,16 @@ class BaseModel:
         self.updated_at = datetime.now()
         storage.save()
 
-    # to_dict: returns a dictionary of all keys/values of __dict__ of the instance
+    # to_dict: returns a dictionary of keys/values of __dict__ of the instance
     def to_dict(self):
-        # copy of the dictionary of the instance so we don’t modify the original
-        # The data is also different as it's converted to string and in ISO format
+        # This is a copy of the __dict__ attribute of the instance
+        # So that we don't modify the original dictionary
+        # The data is also different as it's converted to string & in ISO format
         new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
-        # created_at & updated_at: change from datetime object to string(ISO format)
+        # created_at & updated_at: change from datetime object to string
         # Here instead of creating new variables we can also use:
-        #           old_created = self.created_at and old_updated = self.updated_at
+        #       old_created = self.created_at and old_updated = self.updated_at
 
         old_created = new_dict["created_at"]
         old_updated = new_dict["updated_at"]
