@@ -2,8 +2,8 @@
 """Test suite for the Place class of models.place"""
 import unittest
 
-from models.base_model import BaseModel
-from models.place import Place
+from alu-AirBnB_clone.models.base_model import BaseModel
+from alu-AirBnB_clone.models.base_model import Place
 
 
 class TestPlace(unittest.TestCase):
