@@ -239,4 +239,4 @@ class HBNBCommand(cmd.Cmd):
 # only excute when run as a separate file
 # The cmdloop() method is used to start the interpreter loop
 if __name__ == '__main__':
-    HBNBCommand().cmdloop("\n Hello! Welcome to the Matrix.\n")
+    HBNBCommand().cmdloop()
