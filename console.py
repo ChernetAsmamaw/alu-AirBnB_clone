@@ -3,6 +3,7 @@
 import cmd
 from models import storage
 
+# This is a list of all the classes that we have created
 list_of_classes = [
     "BaseModel",
     "User",
@@ -15,7 +16,8 @@ list_of_classes = [
 
 
 class HBNBCommand(cmd.Cmd):
-    """Command line interpreter for AirBnB project"""
+    """Command line interpreter for AirBnB project
+    that can be used to manage the objects of our project"""
     prompt = "(hbnb) "
 
     def do_quit(self, args):
@@ -32,6 +34,7 @@ class HBNBCommand(cmd.Cmd):
 
     # Overides the behavior to run privious command when pressed enter
     def emptyline(self):
+        """Doesn't execute anything when enter is pressed"""
         pass
 
     def do_create(self, args):
@@ -65,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
         """Prints the string representation of an instance based on the
         class name and id respectively.
         Usage: show <class name> <id>
-        Example: show BaseModel 1234-1234-1234 """
+        Example: show BaseModel 1234-1234-1234"""
 
         # Argument is passed as a string, we split it into list for easy access
         arg_list = args.split()
@@ -107,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id respectively
         then save the change into the JSON file.
-        Usage: destroy BaseModel 1234-1234-1234 """
+        Usage: destroy BaseModel 1234-1234-1234"""
 
         # Argument is passed as a string, we split it into list for easy access
         arg_list = args.split()
@@ -198,6 +201,7 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def precmd(self, line):
+        """This method is called before the command is executed"""
         # Precmd a cmd method that is called before the command is executed
         # This handels the case when the user enters <class name>.<command>
         # For example:  City.all() User.show(<id>) or Place.destroy(<id>) or
