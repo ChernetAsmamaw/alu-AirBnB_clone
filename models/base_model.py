@@ -16,18 +16,18 @@ class BaseModel:
         if kwargs:
             for key, value in kwargs.items():
                 # Here we are checking if the key is equal to the class name,
-                #   if it is we are going to skip it.
-                # This's cuz we don't want to set the class name as an attribute
-                # Each key of the dictionary is an attribute name and each value
-                # of the dictionary is the value of the attribute name.
+                #   if it is we are going to skip it, because we don't want
+                #   to set the class name as an attribute
+                # Each key of the dictionary is an attribute name and each
+                #  value of the dictionary is the value of the attribute name.
                 if key == '__class__':
                     continue
-                # Here we checke if the key is equal to created_at or updated_at,
-                # If it's we are going to convert the string to a datetime object
+                # We checke if the key is equal to created_at or updated_at,
+                # If it's we're going to convert the string to datetime object
                 elif key == 'created_at' or key == 'updated_at':
                     self.__dict__[key] = datetime.strptime(
                         value, "%Y-%m-%dT%H:%M:%S.%f")
-                # If all above conditions are false we are going to set the key
+                # If all above conditions are false we're going to set the key
                 #   and value as an attribute.
                 else:
                     self.__dict__[key] = value
