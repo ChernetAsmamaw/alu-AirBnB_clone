@@ -15,6 +15,7 @@ list_of_classes = [
 
 
 class HBNBCommand(cmd.Cmd):
+    """Command line interpreter for AirBnB project"""
     prompt = "(hbnb) "
 
     def do_quit(self, args):
@@ -232,7 +233,6 @@ class HBNBCommand(cmd.Cmd):
                 pass
 
         return cmd.Cmd.precmd(self, line)
-
 
     # This makes the codes in this file to not execute when imported
     # only excute when run as a separate file
