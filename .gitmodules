@@ -1,3 +1,6 @@
 [submodule "AirBnB_clone_Part-1"]
 	path = AirBnB_clone_Part-1
 	url = https://github.com/ChernetAsmamaw/alu-AirBnB_clone.git
+[submodule "alu-AirBnB_clone"]
+	path = alu-AirBnB_clone
+	url = https://github.com/ChernetAsmamaw/alu-AirBnB_clone.git
