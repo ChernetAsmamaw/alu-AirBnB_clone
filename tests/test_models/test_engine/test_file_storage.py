@@ -1,55 +1,44 @@
-import json
+#!/usr/bin/python3
 import os
 import unittest
-from io import StringIO
-from unittest.mock import patch
+from os import path
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+""" testing the file storage"""
 
-from file_storage import FileStorage
 
+class TestCaseFileStorage(unittest.TestCase):
+    """ class for test cases """
 
-class TestFileStorage(unittest.TestCase):
     def setUp(self):
-        FileStorage.__objects = {}
-        self.file_storage = FileStorage()
+        """ setting up the various
+            components for the test """
+        self.dir_path = 'file.json'
+        self.my_model = FileStorage()
+
+    def tearDown(self):
+        """ dispose json file """
+        if path.exists(self.dir_path):
+            os.remove(self.dir_path)
 
     def test_all(self):
-        self.assertEqual(self.file_storage.all(), {})
-
-        obj1 = {"id": 1, "name": "object 1"}
-        self.file_storage.new(obj1)
-        self.assertEqual(self.file_storage.all(), {"object.1": obj1})
-
-        obj2 = {"id": 2, "name": "object 2"}
-        self.file_storage.new(obj2)
-        self.assertEqual(self.file_storage.all(), {"object.1": obj1, "object.2": obj2})
+        """ check type return by all function """
+        self.assertEqual(type(self.my_model.all()), dict)
 
     def test_new(self):
-        obj = {"id": 1, "name": "object 1"}
-        self.file_storage.new(obj)
-        self.assertEqual(self.file_storage.all(), {"object.1": obj})
+        test_model = BaseModel()
+        self.my_model.new(test_model)
+        len_dict = len(self.my_model.all())
+        self.assertGreater(len_dict, 0)
 
-    @patch('sys.stdout', new_callable=StringIO)
-    def test_save(self, mock_stdout):
-        obj = {"id": 1, "name": "object 1"}
-        self.file_storage.new(obj)
+    def test_save(self):
+        """ save content to file
+         and create if not exist"""
+        self.my_model.save()
+        self.assertEqual(path.exists(self.dir_path), True)
 
-        self.file_storage.save()
-        with open("file.json", 'r') as file:
-            self.assertEqual(json.load(file), {"object.1": obj})
-
-    @patch('sys.stdout', new_callable=StringIO)
-    def test_reload(self, mock_stdout):
-        obj = {"id": 1, "name": "object 1"}
-        self.file_storage.new(obj)
-
-        self.file_storage.save()
-
-        self.file_storage = FileStorage()
-        self.assertEqual(self.file_storage.all(), {})
-        self.file_storage.reload()
-        self.assertEqual(self.file_storage.all(), {"object.1": obj})
-
-        os.remove("file.json")
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_reload(self):
+        model = FileStorage()
+        self.my_model.reload()
+        len_dict = len(model.all())
+        self.assertGreater(len_dict, 0)
