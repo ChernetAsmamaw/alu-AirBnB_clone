@@ -4,12 +4,12 @@ import cmd
 from models import storage
 
 list_of_classes = [
-    "BaseModel", 
-    "User", 
-    "State", 
-    "City", 
-    "Amenity", 
-    "Place", 
+    "BaseModel",
+    "User",
+    "State",
+    "City",
+    "Amenity",
+    "Place",
     "Review"
     ]
 
@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
         print("\nGoodbye!")
         return True
     
-    # EOF(End Of File) is CTRl + D    
+    # EOF(End Of File) is CTRl + D
     def do_EOF(self, args):
         """Exits the program  using CTRL + D"""
         # so that it doesn't continue on the same line
@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, args):
-        """Creates a new instance of BaseModel, User or other classes..., 
+        """Creates a new instance of BaseModel, User or other classes...,
         saves it (to the JSON file) and prints the id.
         Usage: create <class name>
         Example: create BaseModel"""
