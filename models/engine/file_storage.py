@@ -10,8 +10,8 @@ class FileStorage:
     # Private class attributes
     # __ means they are private and shouldn't be accessed form outside the class
     # __file_path: string is the path to the JSON file
-    # __objects: dictionary will store all objects by <class name>.id 
-    #            example: to store a BaseModel object with id=12121212, 
+    # __objects: dictionary will store all objects by <class name>.id
+    #            example: to store a BaseModel object with id=12121212,
     #                the key will be BaseModel.12121212
     __file_path = "file.json"
     __objects = {}
@@ -21,17 +21,17 @@ class FileStorage:
         # Returns the dictionary __objects
         return FileStorage.__objects
 
-    # By concatenating the class name with the object id, we can create 
+    # By concatenating the class name with the object id, we can create
     #   a unique key to store the object in the dictionary __objects
     def new(self, obj):
         class_name = type(obj).__name__
         object_id = obj.id
         key = class_name + "." + object_id
         FileStorage.__objects[key] = obj
-    
-    
-    # Serializes 
+
+    # Serializes
     # __objects to the JSON file or __file_path to save all objects to a file
+
     def save(self):
 
         # Here we have shortend our file name and object
@@ -40,29 +40,29 @@ class FileStorage:
         objects = FileStorage.__objects
 
         # We convert the value(not the key) of each object to a readable string format
-        # Call on the to_dict() method from BaseModel class to convert EACH object to 
-        #    a more understandable dictionary with string values and save them all in 
-        #    a dictionary, so that they can be esaly parsed by 
+        # Call on the to_dict() method from BaseModel class to convert EACH object to
+        #    a more understandable dictionary with string values and save them all in
+        #    a dictionary, so that they can be esaly parsed by
         #    programing languges for extraction. A dict inside a dict.
-        # We can also write the below 3 lines of code in 1 line through 
+        # We can also write the below 3 lines of code in 1 line through
         # dictionary comprehension: -
         #            obj_dict = {key: value.to_dict for key, value in objects.items()}
-             
+
         obj_dict = {}
         for key, value in objects.items():
             obj_dict[key] = value.to_dict()
 
-        # We need to open the file in write mode and encode(utf-8) then convert the 
+        # We need to open the file in write mode and encode(utf-8) then convert the
         #   dictionary to a JSON string and saves it to the file
-        # The dump() function takes two arguments: the dictionary to be converted to 
+        # The dump() function takes two arguments: the dictionary to be converted to
         #   JSON and the file to save it to
         # file_name is the path to the JSON file
         with open(file_name, mode="w", encoding="utf-8") as f:
             dump(obj_dict, f)
 
-    
-    # Deserializes the JSON file to __objects. The reload() method will convert the JSON 
+    # Deserializes the JSON file to __objects. The reload() method will convert the JSON
     #   string back to the dictionary __objects
+
     def reload(self):
 
         from models.base_model import BaseModel
@@ -72,19 +72,18 @@ class FileStorage:
         from models.state import State
         from models.amenity import Amenity
         from models.review import Review
-        
 
         # This is the dictionary we will be loading from the JSON file
         file_name = FileStorage.__file_path
-        # We need to check if the file exists before we try to open it but we 
+        # We need to check if the file exists before we try to open it but we
         #   don't do anything if it doesn't exist
         if exists(file_name):
-            # Here we open the file but since we are only reading from it, 
+            # Here we open the file but since we are only reading from it,
             #   we don't need to specify a mode or encoding(because it's the default)
             with open(file_name) as f:
                 obj_dict = load(f)
-                # print(obj_dict)        
-        # At this point we are able to print the JSON file saved but are still in a 
+                # print(obj_dict)
+        # At this point we are able to print the JSON file saved but are still in a
         #   dictionary form and need to be converted to object form
 
             for value in obj_dict.values():
@@ -92,11 +91,11 @@ class FileStorage:
                 #   the class type is "type" and not a string (type is a built-in function)
                 class_name = eval(value["__class__"])
                 del value["__class__"]
-                # Now we want to create a new object from the dictionary values by passing 
+                # Now we want to create a new object from the dictionary values by passing
                 #   them as keyword arguments to the BaseModel, user, or any other class
-                # Because both in the classes and here we have objects changed to to_dict 
+                # Because both in the classes and here we have objects changed to to_dict
                 #   so when passed through ** we get new objects
                 obj = class_name(**value)
-                # Here we call on the new method from above because we want to pass each 
+                # Here we call on the new method from above because we want to pass each
                 #   newly iterated object to __objects
                 self.new(obj)
