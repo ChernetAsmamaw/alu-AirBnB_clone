@@ -12,7 +12,6 @@ list_of_classes = [
     "Place",
     "Review"
     ]
-
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
@@ -20,7 +19,6 @@ class HBNBCommand(cmd.Cmd):
         """Exits the program"""
         print("\nGoodbye!")
         return True
-    
     # EOF(End Of File) is CTRl + D
     def do_EOF(self, args):
         """Exits the program  using CTRL + D"""
@@ -52,15 +50,16 @@ class HBNBCommand(cmd.Cmd):
             from models.state import State
             from models.amenity import Amenity
             from models.review import Review
-            
-            # Same as new_instance = BaseModel() but dynamically checking for the class  
+
+            # Same as new_instance = BaseModel() but dynamically checking for the class
             # we are using eval() so that we get a class type and not a string
             new_instance = eval(args)()
             new_instance.save()
             print(new_instance.id)
 
+
     def do_show(self, args):
-        """Prints the string representation of an instance based on the 
+        """Prints the string representation of an instance based on the
         class name and id respectively.
         Usage: show <class name> <id>
         Example: show BaseModel 1234-1234-1234 """
@@ -69,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
         arg_list = args.split()
         #print(arg_list)
         
-        # If nothing is entered 
+        # If nothing is entered
         if len(arg_list) == 0:
             print('** class name missing **')
         # If the argument being passed is not BaseModel
@@ -77,19 +76,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn\'t exist **'")
         # If the id is not passed
         elif len(arg_list) < 2:
-                print('** instance id missing **')      
-        
-
-        # We can write the code below in much shoter way: - 
-        # Sice the basic consept is that storage.all()[key] returns the 
+                print('** instance id missing **')        
+        # We can write the code below in much shoter way: -
+        # Sice the basic consept is that storage.all()[key] returns the
         # information of an object key being <class name>.<id>
-
         #elif "{}.{}".format(arg_list[0], arg_list[1]) not in storage.all():
             #print("** no instance found **")
         #else:
             #print(storage.all()["{}.{}".format(arg_list[0], arg_list[1])])
         # we have used this below in the destroy method
-        
         else:
             # Here we check if the id entered exists in the JSON file
             obj_list = storage.all()
@@ -106,6 +101,7 @@ class HBNBCommand(cmd.Cmd):
                 info = obj_list[key]
                 print(info)
 
+
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id respectively
         then save the change into the JSON file.
@@ -115,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
         arg_list = args.split()
         #print(arg_list)
         
-        # If nothing is entered 
+        # If nothing is entered
         if len(arg_list) == 0:
             print('** class name missing **')
         # If the argument being passed is not BaseModel
@@ -123,20 +119,19 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn\'t exist **'")
         # If the id is not passed
         elif len(arg_list) < 2:
-                print('** instance id missing **')      
+                print('** instance id missing **')
         elif "{}.{}".format(arg_list[0], arg_list[1]) not in storage.all():
             print("** no instance found **")
         else:
             del storage.all()["{}.{}".format(arg_list[0], arg_list[1])]
             # SO that the deletion is saved in the JSON file
             storage.save()
-    
+
+
     def do_all(self, args):
         """Prints all string representation of all instances based on the class name.
         or not based on the class name.
         Usage: all BaseModel or all"""
-
-
         obj_list = []
         # If there are no arguments passed after the self parameter the loop 
         # iterates over all the values in the storage object
@@ -145,7 +140,6 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             for obj in storage.all().values():
                 obj_list.append(str(obj))
-
         # This checks if the argument passed is not BaseModel
         # If it isn't then it prints the message 
         # After that it does the same thing as above(prints all the objects)
@@ -158,10 +152,8 @@ class HBNBCommand(cmd.Cmd):
                 #  compare it with the argument passed
                 class_name = key.split('.')[0]
                 if class_name == args:
-                    obj_list.append(str(value))               
-
+                    obj_list.append(str(value))
         print(obj_list)
-
 
 
     def do_update(self, args):
@@ -171,20 +163,19 @@ class HBNBCommand(cmd.Cmd):
                 Example: - update BaseModel 1234-1234-1234 email "aibnb@mail.com\""""
 
 
-        arg_list = args.split()     
+        arg_list = args.split()
         if len(arg_list) == 0:
             print('** class name missing **')
         elif arg_list[0] not in list_of_classes:
             print("** class doesn\'t exist **'")
         elif len(arg_list) < 2:
-                print('** instance id missing **')      
+                print('** instance id missing **')
         elif "{}.{}".format(arg_list[0], arg_list[1]) not in storage.all():
             print("** no instance found **")
         elif len(arg_list) < 3:
             print('** attribute name missing **')
         elif len(arg_list) < 4:
             print('** value missing **')
-        
         else:
             class_name = arg_list[0]
             id = arg_list[1]
@@ -207,13 +198,11 @@ class HBNBCommand(cmd.Cmd):
                 count += 1
         print(count)
 
-    
     def precmd(self, line):
         # Precmd a cmd method that is called before the command is executed
-        # This is to handle the case when the user enters <class name>.<command> 
-        # For example:  City.all() User.show(<id>) or Place.destroy(<id>) or 
+        # This is to handle the case when the user enters <class name>.<command>
+        # For example:  City.all() User.show(<id>) or Place.destroy(<id>) or
         #               State.update(<id>, <attribute name>, <attribute value>)
-        
 
         if "." in line:
             if "()" in line:
@@ -230,7 +219,6 @@ class HBNBCommand(cmd.Cmd):
                     # This removes the double quotes from the string
                     line[2] = line[2].replace('"', '')
                     line = str(line[1]) + " " + str(line[0]) + " " + str(line[2])
-                
                 elif len(line) == 4:
                     line[2] = line[2].replace('"', '')
                     print(line)
@@ -238,12 +226,9 @@ class HBNBCommand(cmd.Cmd):
                     print(line)
                     line = str(line[1]) + " " + str(line[0]) + " " + str(line[2]) + " " + str(line[3])
                     print(line)
-            
-            
 
             else:
-                pass      
-        
+                pass
         
         return cmd.Cmd.precmd(self, line)
 
@@ -251,13 +236,7 @@ class HBNBCommand(cmd.Cmd):
 
 
 
-
-
-
-
-    
-
-# This makes the codes in this file to not execute when imported 
+# This makes the codes in this file to not execute when imported
 # only excute when run as a separate file
 # The cmdloop() method is used to start the interpreter loop
 if __name__ == '__main__':
