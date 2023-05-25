@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
                 id_list.append(id)
             if arg_list[1] not in id_list:
                 print("** no instance found **")
-            # Because key is split above, we concatenate the two strings to get a key
+            # Because key is split we concatenate the two strings to get a key
             # The key that retrieves the object information form the JSON file
             else:
                 key = "{}.{}".format(arg_list[0], arg_list[1])
@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
         # If there are no arguments passed after the self parameter the loop
         # iterates over all the values in the storage object
         # And appends a string representation of each object to the obj_list.
-        # Storage object is a dictionary of objects created by FileStorage class
+        # Storage object is a dict of objects created by FileStorage class
         if len(args) == 0:
             for obj in storage.all().values():
                 obj_list.append(str(obj))
