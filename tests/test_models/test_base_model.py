@@ -85,7 +85,6 @@ class TestBaseModel(unittest.TestCase):
         b = BaseModel()
         self.assertEqual(b.created_at, b.updated_at)
 
-
     def test_that_save_func_update_update_at_attr(self):
         """
         Checks that save() method updates the updated_at attribute
@@ -95,6 +94,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(b.created_at, b.updated_at)
         self.assertGreater(b.updated_at.microsecond,
                            b.created_at.microsecond)
+
     def test_if_to_dict_returns_dict(self):
         """
         Checks if BaseModel.to_dict() returns a dict object
@@ -280,9 +280,6 @@ class TestBaseModel(unittest.TestCase):
         """Checks that to_dict() is a dict object not equal to __dict__"""
         bm = BaseModel()
         self.assertNotEqual(bm.to_dict(), bm.__dict__)
-
-
-
 
 
 if __name__ == "__main__":
