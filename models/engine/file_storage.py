@@ -39,7 +39,7 @@ class FileStorage:
         file_name = FileStorage.__file_path
         objects = FileStorage.__objects
 
-        # We convert the value(not key) of each object to readable string format
+        # We convert the value(not key) of each object to readable string
         # Call the to_dict() method from BaseModel to convert EACH object to
         #    a more understandable dictionary with string values,
         #    and save all in a dictionary, so they can be esaly parsed by
@@ -88,13 +88,13 @@ class FileStorage:
         # in a dictionary form and need to be converted to object form
 
             for value in obj_dict.values():
-                # This gets class name of the object & the eval() function makes sure
-                #   the class type is "type" and not a string or something else
+                # This gets the class name of the object & the eval() function
+                # makes sure the class type is "type" and not a string
                 class_name = eval(value["__class__"])
                 del value["__class__"]
                 # Now we want to create a new object from the dictionary values
-                # by passing them as keyword arguments to the BaseModel, user...etc
-                # Cuz both in the classes & here we have objects changed to to_dict
+                # by passing them as keyword arguments to BaseModel, user...etc
+                # Cuz both in the classes & here objects are changed to to_dict
                 #   so when passed through ** we get new objects
                 obj = class_name(**value)
                 # Here we call on the new method from above because we want to
