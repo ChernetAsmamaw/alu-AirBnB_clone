@@ -39,13 +39,13 @@ class HBNBCommand(cmd.Cmd):
         saves it (to the JSON file) and prints the id.
         Usage: create <class name>
         Example: create BaseModel"""
-       # If nothing is entered
+        # If nothing is entered
         if len(args) == 0:
             print('** class name missing **')
         # If the argument being passed is not BaseModel
         elif args not in list_of_classes:
             print("** class doesn\'t exist **'")
-        # If the arg is class name then we create an instance of that class & save it
+        # If the arg is class name then we create an instance of that class
         else:
             from models.base_model import BaseModel
             from models.user import User
@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
             from models.amenity import Amenity
             from models.review import Review
 
-            # Same as new_instance = BaseModel() but dynamically checking for the class
+            # Here we are dynamically creating a new instance of a class
             # we are using eval() so that we get a class type and not a string
             new_instance = eval(args)()
             new_instance.save()
@@ -67,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
         Usage: show <class name> <id>
         Example: show BaseModel 1234-1234-1234 """
 
-        # The argument is passed as a string, we split it into a list for easy access
+        # Argument is passed as a string, we split it into list for easy access
         arg_list = args.split()
         # print(arg_list)
 
@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
                 id_list.append(id)
             if arg_list[1] not in id_list:
                 print("** no instance found **")
-            # Because the key is split above, we concatenate the two strings to get a key
+            # Because key is split above, we concatenate the two strings to get a key
             # The key that retrieves the object information form the JSON file
             else:
                 key = "{}.{}".format(arg_list[0], arg_list[1])
@@ -109,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
         then save the change into the JSON file.
         Usage: destroy BaseModel 1234-1234-1234 """
 
-        # The argument is passed as a string, we split it into a list for easy access
+        # Argument is passed as a string, we split it into list for easy access
         arg_list = args.split()
         # print(arg_list)
 
@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
         # If there are no arguments passed after the self parameter the loop
         # iterates over all the values in the storage object
         # And appends a string representation of each object to the obj_list.
-        # The storage object is a dictionary of objects created by the FileStorage class
+        # Storage object is a dictionary of objects created by FileStorage class
         if len(args) == 0:
             for obj in storage.all().values():
                 obj_list.append(str(obj))
@@ -157,10 +157,10 @@ class HBNBCommand(cmd.Cmd):
         print(obj_list)
 
     def do_update(self, args):
-        """Updates an instance based on the class name and id respectively
-        by adding or updating attribute then save the change into the JSON file.
+        """Updates an instance based on the class name and id by adding or
+        updating attribute then save the change into the JSON file.
         Usage:  update <class name> <id> <attribute name> "<attribute value>
-                Example: - update BaseModel 1234-1234-1234 email "aibnb@mail.com\""""
+        Example: update BaseModel 1234-1234-1234 email "aibnb@mail.com\""""
 
         arg_list = args.split()
         if len(arg_list) == 0:
@@ -199,7 +199,7 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         # Precmd a cmd method that is called before the command is executed
-        # This is to handle the case when the user enters <class name>.<command>
+        # This handels the case when the user enters <class name>.<command>
         # For example:  City.all() User.show(<id>) or Place.destroy(<id>) or
         #               State.update(<id>, <attribute name>, <attribute value>)
 
@@ -207,13 +207,13 @@ class HBNBCommand(cmd.Cmd):
             if "()" in line:
                 # Handle the case when the command has no arguments
                 line = line.replace(".", " ").replace("(", "").replace(")", "")
-                # Here we created a tuple of the command that we want to execute
+                # Here we created a tuple of the command to be executed
                 line = line.split(" ")
                 line = str(line[1]) + " " + str(line[0])
             elif "(" in line and ")" in line:
                 line = line.replace(".", " ").replace(
                     "(", " ").replace(")", "")
-                # Here we created a tuple of the command that we want to execute
+                # Here we created a tuple of the command to be excuted
                 line = line.split(" ")
                 if len(line) == 3:
                     # This removes the double quotes from the string
