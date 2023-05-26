@@ -5,7 +5,7 @@ The goal of this project is deploy on server a simple copy of the AirBnB website
 <div align=center>  
     <img  
     style="text-align:center"  
-    src="https://github.com/ChernetAsmamaw/alu-airbnb_clone/blob/main/assets/airbnb.png"
+    src="https://github.com/ChernetAsmamaw/alu-airbnb_clone/blob/main/assets/airbnb_clone.png"
     alt="ALU BSE"/>  
 </div>
 
@@ -51,7 +51,7 @@ The console is the first part of the **AirBnB clone** project which aims to depl
 <div align=center>  
     <img  
     style="text-align:center"  
-    src="https://raw.githubusercontent.com/ChernetAsmamaw/hbtn_config/main/assets/hbnb.png"  
+    src="https://raw.githubusercontent.com/ChernetAsmamaw/hbtn_config/main/assets/console.png"  
     alt="holbertonbnb"/>  
 </div>
 
@@ -157,3 +157,9 @@ $
 - [Bevil Mulor](https://www.linkedin.com/in/bevil-mulor-726b13260?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BZKogAbCdSFa9k7L2q2I5uA%3D%3D)
 
 </details>
+
+<style>
+summary::-webkit-details-marker {
+  font-size: 2em;
+}
+</style>
