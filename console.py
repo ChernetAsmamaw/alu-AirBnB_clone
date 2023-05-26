@@ -200,44 +200,27 @@ class HBNBCommand(cmd.Cmd):
             if class_name == args:
                 count += 1
         print(count)
-
-    def precmd(self, line):
-        """This method is called before the command is executed"""
-        # Precmd a cmd method that is called before the command is executed
-        # This handels the case when the user enters <class name>.<command>
-        # For example:  City.all() User.show(<id>) or Place.destroy(<id>) or
-        #               State.update(<id>, <attribute name>, <attribute value>)
-
-        if "." in line:
-            if "()" in line:
-                # Handle the case when the command has no arguments
-                line = line.replace(".", " ").replace("(", "").replace(")", "")
-                # Here we created a tuple of the command to be executed
-                line = line.split(" ")
-                line = str(line[1]) + " " + str(line[0])
-            elif "(" in line and ")" in line:
-                line = line.replace(".", " ").replace(
-                    "(", " ").replace(")", "")
-                # Here we created a tuple of the command to be excuted
-                line = line.split(" ")
-                if len(line) == 3:
-                    # This removes the double quotes from the string
-                    line[2] = line[2].replace('"', '')
-                    line = str(line[1]) + " " + \
-                        str(line[0]) + " " + str(line[2])
-                elif len(line) == 4:
-                    line[2] = line[2].replace('"', '')
-                    print(line)
-                    line[3] = line[3].replace('"', '')
-                    print(line)
-                    line = str(line[1]) + " " + str(line[0]) + \
-                        " " + str(line[2]) + " " + str(line[3])
-                    print(line)
-
-            else:
-                pass
-
-        return cmd.Cmd.precmd(self, line)
+        
+    def default(self, arg):
+        """Default behavior for cmd module when input is invalid"""
+        argdict = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            argl = [arg[:match.span()[0]], arg[match.span()[1]:]]
+            match = re.search(r"\((.*?)\)", argl[1])
+            if match is not None:
+                command = [argl[1][:match.span()[0]], match.group()[1:-1]]
+                if command[0] in argdict.keys():
+                    call = "{} {}".format(argl[0], command[1])
+                    return argdict[command[0]](call)
+        print("*** Unknown syntax: {}".format(arg))
+        return False
 
 
 # This makes the codes in this file to not execute when imported
