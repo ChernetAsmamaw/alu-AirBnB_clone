@@ -83,29 +83,28 @@ class HBNBCommand(cmd.Cmd):
         # If the id is not passed
         elif len(arg_list) < 2:
             print('** instance id missing **')
-        # We can write the code below in much shoter way: -
-        # Sice the basic consept is that storage.all()[key] returns the
+        # Since the basic consept is that storage.all()[key] returns the
         # information of an object key being <class name>.<id>
-        # elif "{}.{}".format(arg_list[0], arg_list[1]) not in storage.all():
-            # print("** no instance found **")
-        # else:
-            # print(storage.all()["{}.{}".format(arg_list[0], arg_list[1])])
-        # we have used this below in the destroy method
+        elif "{}.{}".format(arg_list[0], arg_list[1]) not in storage.all():
+            print("** no instance found **")
         else:
+            print(storage.all()["{}.{}".format(arg_list[0], arg_list[1])])
+        # Below is a more discriptive form of elif & else statments above
+        # else:
             # Here we check if the id entered exists in the JSON file
-            obj_list = storage.all()
-            id_list = []
-            for key in obj_list.keys():
-                id = key.split('.')[1]
-                id_list.append(id)
-            if arg_list[1] not in id_list:
-                print("** no instance found **")
+            # obj_list = storage.all()
+            # id_list = []
+            # for key in obj_list.keys():
+            # id = key.split('.')[1]
+            # id_list.append(id)
+            # if arg_list[1] not in id_list:
+            # print("** no instance found **")
             # Because key is split we concatenate the two strings to get a key
             # The key that retrieves the object information form the JSON file
-            else:
-                key = "{}.{}".format(arg_list[0], arg_list[1])
-                info = obj_list[key]
-                print(info)
+            # else:
+            # key = "{}.{}".format(arg_list[0], arg_list[1])
+            # info = obj_list[key]
+            # print(info)
 
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id respectively
