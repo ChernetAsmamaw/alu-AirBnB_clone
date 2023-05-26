@@ -5,7 +5,7 @@ The goal of this project is deploy on server a simple copy of the AirBnB website
 <div align=center>  
     <img  
     style="text-align:center"  
-    src="https://github.com/ChernetAsmamaw/alu-airbnb_clone/blob/main/assets/console.png"
+    src="https://github.com/ChernetAsmamaw/alu-airbnb_clone/blob/main/assets/airbnb.png"
     alt="ALU BSE"/>  
 </div>
 
@@ -39,7 +39,7 @@ The complete web application will be composed by:
 </div>
 
 <details>
-<summary> <h1 style="display: inline-block">The console</h1> </summary>
+<summary style="font-size: 1.5em;"> <h1 style="display: inline-block">The console</h1> </summary>
 <p style="margin-bottom: 20px;"> </p>
 
 # AirBnB clone - The console
