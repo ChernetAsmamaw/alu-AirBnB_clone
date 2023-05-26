@@ -39,7 +39,7 @@ The complete web application will be composed by:
 </div>
 
 <details>
-<summary style="font-size: 1.5em;"> <h1 style="display: inline-block">The console</h1> </summary>
+<summary style="font-size: 1em;"> <h2 style="display: inline-block">The console</h2> </summary>
 <p style="margin-bottom: 20px;"> </p>
 
 # AirBnB clone - The console
@@ -157,9 +157,3 @@ $
 - [Bevil Mulor](https://www.linkedin.com/in/bevil-mulor-726b13260?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BZKogAbCdSFa9k7L2q2I5uA%3D%3D)
 
 </details>
-
-<style>
-summary::-webkit-details-marker {
-  font-size: 2em;
-}
-</style>
