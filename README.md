@@ -51,7 +51,7 @@ The console is the first part of the **AirBnB clone** project which aims to depl
 <div align=center>  
     <img  
     style="text-align:center"  
-    src="https://raw.githubusercontent.com/ChernetAsmamaw/hbtn_config/main/assets/console.png"  
+    src="https://github.com/ChernetAsmamaw/alu-airbnb_clone/blob/main/assets/console.png"
     alt="holbertonbnb"/>  
 </div>
 
