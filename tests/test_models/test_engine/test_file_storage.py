@@ -4,7 +4,6 @@ import unittest
 from os import path
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
-"""Testing the file storage"""
 
 
 class TestCaseFileStorage(unittest.TestCase):
@@ -34,11 +33,20 @@ class TestCaseFileStorage(unittest.TestCase):
     def test_save(self):
         """ save content to file
          and create if not exist"""
+        test_model = BaseModel()
+        self.my_model.new(test_model)
         self.my_model.save()
         self.assertEqual(path.exists(self.dir_path), True)
 
     def test_reload(self):
+        test_model = BaseModel()
+        self.my_model.new(test_model)
+        self.my_model.save()
         model = FileStorage()
         model.reload()
         len_dict = len(model.all())
         self.assertGreater(len_dict, 0)
+
+
+if __name__ == '__main__':
+    unittest.main()
