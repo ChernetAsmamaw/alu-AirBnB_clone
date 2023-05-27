@@ -4,7 +4,7 @@ import unittest
 from os import path
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
-""" testing the file storage"""
+"""Testing the file storage"""
 
 
 class TestCaseFileStorage(unittest.TestCase):
@@ -39,6 +39,6 @@ class TestCaseFileStorage(unittest.TestCase):
 
     def test_reload(self):
         model = FileStorage()
-        self.my_model.reload()
+        model.reload()
         len_dict = len(model.all())
         self.assertGreater(len_dict, 0)
