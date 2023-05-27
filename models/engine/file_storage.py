@@ -6,13 +6,14 @@ from os.path import exists
 
 
 class FileStorage:
+    """
+        Represent an abstracted storage engine.
+        Purpose: Provide a way to store objects in a JSON file.
+        Attributes:
+            __file_path (str): string to represent the path to the JSON file
+            __objects (dict): dictionary to store instantiated objects
+    """
 
-    # Private class attributes
-    # __ means they're private & shouldn't be accessed outside the class
-    # __file_path: string is the path to the JSON file
-    # __objects: dictionary will store all objects by <class name>.id
-    #            example: to store a BaseModel object with id=12121212,
-    #                the key will be BaseModel.12121212
     __file_path = "file.json"
     __objects = {}
 
