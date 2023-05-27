@@ -12,7 +12,7 @@ class TestCaseFileStorage(unittest.TestCase):
     def setUp(self):
         """ setting up the various
             components for the test """
-        self.dir_path = 'file.json'
+        self.dir_path = os.path.abspath('file.json')
         self.my_model = FileStorage()
 
     def tearDown(self):
