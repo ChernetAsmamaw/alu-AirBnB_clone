@@ -13,7 +13,7 @@ class FileStorage:
     # __objects: dictionary will store all objects by <class name>.id
     #            example: to store a BaseModel object with id=12121212,
     #                the key will be BaseModel.12121212
-    __file_path = "file.json"
+    __file_path = "../file.json"
     __objects = {}
 
     # Public instance methods
