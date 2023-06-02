@@ -1,7 +1,7 @@
-#My AirBnB Clone - Web Static
+# AirBnB Clone - Web Static
 Hi, I'm Chernet, and this is my beginner-level project for creating a web static clone of AirBnB. The goal of this project is to design and prototype each element of the web application step-by-step by creating simple HTML static pages, a style guide, and fake content.
 
-##HTML and CSS
+## HTML and CSS
 I learned how to manipulate HTML and CSS languages during this project. HTML is the structure of my page, and CSS is the styling of my page. I fixed my HTML part before starting with styling because without any structure, I couldn't apply any design. I learned about the following concepts:
 
 ### Concepts
