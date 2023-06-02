@@ -22,8 +22,8 @@ The complete web application will be composed by:
 
 | Stage         | Repo                                                              |
 | ------------- | ----------------------------------------------------------------- |
-| The console   | [AirBnB_clone_Part-1](https://github.com/ChernetAsmamaw/AirBnB_clone) |
-| Web static    | :soon:                                                            |
+| The console   | [Console](https://github.com/ChernetAsmamaw/AirBnB_clone) |
+| Web static    | [Web Static](https://github.com/ChernetAsmamaw/alu-AirBnB_clone/tree/main/web_static)                                                            |
 | MySQL storage | :soon:                                                            |
 | Web framework | :soon:                                                            |
 | RESTful API   | :soon:                                                            |
